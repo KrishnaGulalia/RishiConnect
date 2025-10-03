@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { GoogleIcon } from './icons/GoogleIcon';
 
@@ -16,8 +15,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       return; // User cancelled prompt
     }
 
-    if (!emailToValidate.endsWith('@rishihood.edu.in')) {
-      setError('Access is restricted to Rishihood University students. Please use your @rishihood.edu.in email.');
+    const isValidDomain = emailToValidate.endsWith('@rishihood.edu.in') || emailToValidate.endsWith('@nst.rishihood.edu.in');
+
+    if (!isValidDomain) {
+      setError('Access is restricted to Rishihood University students. Please use an email ending with @rishihood.edu.in or @nst.rishihood.edu.in.');
       return;
     }
     onLogin(emailToValidate);
